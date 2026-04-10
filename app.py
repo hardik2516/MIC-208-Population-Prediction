@@ -171,12 +171,14 @@ if insight_year > min_year:
     yoy_growth = total_pop - prev_year_data['Predicted Total Population']
 
 def format_number(num):
-    if num >= 1e9:
-        return f"{num / 1e9:.2f} B"
-    elif num >= 1e6:
-        return f"{num / 1e6:.2f} M"
+    sign = "-" if num < 0 else ""
+    abs_num = abs(num)
+    if abs_num >= 1e7:
+        return f"{sign}{abs_num / 1e7:.2f} Cr"
+    elif abs_num >= 1e5:
+        return f"{sign}{abs_num / 1e5:.2f} L"
     else:
-        return f"{num:,.0f}"
+        return f"{sign}{abs_num:,.0f}"
 
 st.subheader(f"💡 Key Insights for {insight_year}")
 
